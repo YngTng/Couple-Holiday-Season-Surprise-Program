@@ -2,8 +2,8 @@
 
 A DIY template for a tiny, cosy "operating system" you give to your partner for the holiday season.
 It boots up, shows a desktop, and new apps unlock on their own days: a countdown until you meet,
-a birthday app with candles and a letter, a Christmas tree with a present, a New Year's Eve invitation,
-an anniversary photo wall, a playlist and three mini games with prize coupons.
+a Christmas tree with a present, a New Year's Eve invitation, a playlist and three mini games with
+prize coupons.
 
 It runs locally on a Windows laptop: you build it into a zip, and the recipient double-clicks a `.bat`
 file that serves it on their own computer. Nothing is hosted online, nothing needs installing on their
@@ -46,27 +46,21 @@ SVG and update the path.
 | File | Placeholder | What to enter |
 | --- | --- | --- |
 | `src/content/person.ts` | `THEIR_NAME = 'Their Name'` | The name or nickname of the person the site is for |
-| `src/content/person.ts` | `MY_NAME = 'Your Name'` | Your name; used as the letter signature and on coupons |
+| `src/content/person.ts` | `MY_NAME = 'Your Name'` | Your name; used as the invitation signature and on coupons |
 | `src/content/person.ts` | `APP_NAME = 'YourProject.exe'` | The name of your "OS", shown on the boot screen and taskbar |
 | `index.html` | `<title>YourProject.exe</title>` | Same name, for the browser tab |
 | `package.json` | `"name": "your-project-name"` | A lowercase package name (optional) |
 | `src/config/time.ts` | `UNLOCK_TZ = 'UTC'` | Your IANA time zone, e.g. `Europe/London`. Every unlock and theme uses it |
-| `src/config/time.ts` | `THEME_DATES` (2026-12-10, 12-11, 12-25, 12-30) | Birthday, day after the birthday, Christmas, anniversary |
+| `src/config/time.ts` | `THEME_DATES` (2026-12-11, 12-25) | Start of the "Missing You" theme, and Christmas |
 | `src/config/time.ts` | `REUNION_AT` (2026-12-20 18:00) | When you'll be together again: the countdown target |
 | `src/apps/registry.ts` | `unlockAt` dates | Unlock day of each app (keep in line with `THEME_DATES`) |
 | `src/apps/registry.ts` | `windowTitle: 'Time until we meet'` | Title of the Countdown window |
-| `src/theme/themes.ts` | `dates: 'Dec 10'` etc. | The date labels shown in Settings for each theme |
+| `src/theme/themes.ts` | `dates: 'Dec 25'` etc. | The date labels shown in Settings for each theme |
 | `src/dev/DateSimulator.tsx` | `PRESETS` | Quick-jump dates in the simulator (match your dates) |
 | `src/config/devtools.ts` | `SIMULATOR_PASSWORD_SHA256` (password `change-me`) | SHA-256 of your own simulator password; the file shows the command |
 | `src/content/countdown.ts` | `Your first countdown message` …, `/images/countdown-1.svg` | Rotating messages, optional image or GIF and its alt text |
-| `src/content/birthday.ts` | `greeting`, `candleCount`, `Your gift tag text` | Headline, number of candles (1–30), gift tag text |
-| `src/content/birthday.ts` | `Your birthday letter, first paragraph.` … | The birthday letter (paragraphs separated by `\n\n`), sign-off and PS |
-| `src/content/birthday.ts` | `languageLabel: 'English'`, `translation` | The letter's language label, plus an optional second-language version and its label |
 | `src/content/christmas.ts` | `Your Christmas greeting`, `Your gift tag text` | Greeting above the tree, gift tag |
 | `src/content/christmas.ts` | `/photos/gift.svg`, `Describe your Christmas present here`, `Your message about the present here.` | Photo of the real present (use a file name that doesn't give it away), alt text, message |
-| `src/content/anniversary.ts` | `Your intro line here`, `Your bouquet button label`, `Your anniversary message here.` | Text for the anniversary app |
-| `src/content/anniversary.ts` | `/photos/bouquet.svg`, `/photos/anniversary-message.svg` | Bouquet button picture (transparent PNG works best) and the picture above the message |
-| `src/content/memories.ts` | `Caption for memory 1` …, `/photos/1.svg` … | Your photo wall: one entry per photo with caption, date and alt text |
 | `src/content/newyear.ts` | `Your invitation intro here.`, `Dress code: ...`, `Your Happy New Year message here.` | The New Year's Eve invitation |
 | `src/content/newyear.ts` | `Restaurant Name`, `123 Example Street, City`, `Dessert Place Name` … | The plan for the night: times, venues, addresses, notes |
 | `src/content/newyear.ts`, `src/apps/newyear/NewYearApp.tsx` | `date: 'Thursday 31 December 2026'`, `NYE_YEAR = 2026` | The New Year's Eve date text and its year (see How the dates work) |
@@ -88,9 +82,9 @@ Tips:
 
 ## How the dates work
 
-**Every date below is an example. Change them to your own birthday, reunion and anniversary, in any
-month and year.** The template ships with a December 2026 schedule only because it's built around the
-holiday season.
+**Every date below is an example. Change them to your own dates (when you're apart, when you meet
+again, when each game opens), in any month and year.** The template ships with a December 2026
+schedule only because it's built around the holiday season.
 
 All "is it unlocked yet?" and theme decisions use one time zone, `UNLOCK_TZ` in `src/config/time.ts`.
 Dates are `YYYY-MM-DD` strings in that time zone.
@@ -98,14 +92,12 @@ Dates are `YYYY-MM-DD` strings in that time zone.
 | Example date | Theme | Unlocks | Where to change it |
 | --- | --- | --- | --- |
 | any time | | Playlist, Countdown, Settings, NYE.exe (always open) | `ALWAYS_UNLOCKED` apps in `src/apps/registry.ts` |
-| until Dec 9 | Cosy December | | (the default theme before `missingFrom`) |
+| until Dec 10 | Cosy December | | (the default theme before `missingFrom`) |
 | Dec 1 | Cosy December | Mini Games app (each game then opens on its own date) | `unlockAt` for `games` in `src/apps/registry.ts` |
 | Dec 14, Dec 19, Dec 26 | | Jar Full Of You, quiz, Rebuild Us | `GAME_UNLOCKS` in `src/content/games.ts` |
-| Dec 10 | Birthday | Birthday.exe | `THEME_DATES.birthday` and `unlockAt` for `birthday` |
-| Dec 11 – Dec 20, 6:00 pm | Missing You | | `THEME_DATES.missingFrom` until `REUNION_AT` |
-| from Dec 20, 6:00 pm | Together Mode | Countdown switches to "LongDistance.exe has stopped running" | `REUNION_AT` in `src/config/time.ts` |
+| Dec 11 – Dec 20, 6:00 pm | Missing You | | `THEME_DATES.missingFrom` in `src/config/time.ts`, until `REUNION_AT` |
+| from Dec 20, 6:00 pm | Together Mode (every day except Christmas) | Countdown switches to "LongDistance.exe has stopped running" | `REUNION_AT` in `src/config/time.ts` |
 | Dec 25 | Christmas | Christmas.exe | `THEME_DATES.christmas` and `unlockAt` for `christmas` |
-| Dec 30 onward | Anniversary | Anniversary.exe | `THEME_DATES.anniversaryFrom` and `unlockAt` for `anniversary` |
 | Dec 31 | | NYE.exe counts down to midnight, then says Happy New Year | `NYE_YEAR` in `src/apps/newyear/NewYearApp.tsx` and `NYE.date` in `src/content/newyear.ts` |
 
 When you change a date, update every place in its row, then:
@@ -114,9 +106,8 @@ When you change a date, update every place in its row, then:
   the `PRESETS` in `src/dev/DateSimulator.tsx` (quick-jump buttons). These are display text only, so
   nothing breaks if you forget, but they'd show the old dates.
 - If your dates aren't in December, rename the "Cosy December" theme label in `src/theme/themes.ts`.
-- Keep the order the theme logic expects: birthday, then `missingFrom`, then `REUNION_AT`, with
-  `anniversaryFrom` last. Birthday and Christmas are single days and win over the ranges around them;
-  Anniversary runs from its date onward.
+- Keep the order the theme logic expects: `missingFrom` before `REUNION_AT`. Christmas is a single day
+  and wins over the theme around it.
 
 Use the date simulator (backtick key) to jump to each date and check it.
 

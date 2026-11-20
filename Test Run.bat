@@ -37,7 +37,7 @@ echo    - Test mode is ON while UNLOCK_EVERYTHING is true in
 echo      src\config\testing.ts, so every app is open.
 echo    - Press the ` key ^(backtick^) to open the date simulator and
 echo      try other days ^(themes, countdown, unlock badges^).
-echo    - Progress ^(ornaments, puzzle best, birthday^) is saved in this
+echo    - Progress ^(ornaments, puzzle best, prizes^) is saved in this
 echo      browser. For a fresh start, open the link in a private window.
 echo.
 echo   Leave this window open while testing.

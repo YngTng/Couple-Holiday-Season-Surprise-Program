@@ -4,9 +4,7 @@ export type AppId =
   | 'playlist'
   | 'games'
   | 'countdown'
-  | 'birthday'
   | 'christmas'
-  | 'anniversary'
   | 'newyear'
   | 'settings';
 

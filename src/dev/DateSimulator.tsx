@@ -13,13 +13,11 @@ interface Preset {
 const PRESETS: readonly Preset[] = [
   { label: 'Nov 30', value: '2026-11-30T12:00' },
   { label: 'Dec 1', value: '2026-12-01T09:00' },
-  { label: 'Dec 9', value: '2026-12-09T12:00' },
-  { label: 'Dec 10', value: '2026-12-10T09:00' },
   { label: 'Dec 11', value: '2026-12-11T12:00' },
   { label: 'Dec 20', value: '2026-12-20T09:00' },
   { label: 'Dec 20, 17:59:50', value: '2026-12-20T17:59:50' },
   { label: 'Dec 25', value: '2026-12-25T09:00' },
-  { label: 'Dec 30', value: '2026-12-30T09:00' },
+  { label: 'Dec 31', value: '2026-12-31T20:00' },
 ];
 
 const FOCUSABLE = 'button, input, select, textarea, [href], [tabindex]:not([tabindex="-1"])';
@@ -62,7 +60,7 @@ export function DateSimulator({ onClose }: { onClose: () => void }) {
 
   const resetProgress = () => {
     const ok = window.confirm(
-      'Clear all saved progress (birthday, Christmas, letters, quiz coupon, best scores)? Settings and the simulated date are kept.',
+      'Clear all saved progress (Christmas, invitation, game prizes, best scores)? Settings and the simulated date are kept.',
     );
     if (!ok) return;
     clearProgress();

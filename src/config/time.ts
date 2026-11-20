@@ -6,11 +6,10 @@ export const UNLOCK_TZ = 'UTC';
 
 /** Calendar dates (YYYY-MM-DD in UNLOCK_TZ) that drive the theme system. */
 export const THEME_DATES = {
-  birthday: '2026-12-10',
+  /** First day of the "Missing You" theme (until REUNION_AT). Before it, the cosy theme shows. */
   missingFrom: '2026-12-11',
   // Together Mode has no date here: it starts at REUNION_AT below, at the reunion moment.
   christmas: '2026-12-25',
-  anniversaryFrom: '2026-12-30',
 } as const;
 
 /** Reunion moment: when you are back together, e.g. 6:00 pm on Dec 20, 2026 (UNLOCK_TZ). */

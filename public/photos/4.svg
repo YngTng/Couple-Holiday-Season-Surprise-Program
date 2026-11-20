@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c9d6"/><stop offset="1" stop-color="#c7b2ec"/></linearGradient></defs>
-  <rect width="1200" height="900" fill="url(#g)"/>
-  <rect x="72" y="54" width="1056" height="792" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="6" stroke-dasharray="18 14"/>
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="85" font-weight="600" fill="#4a2a4f">Photo 4</text>
-  <text x="50%" y="569" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="47" fill="#4a2a4f" fill-opacity="0.75">Replace with your own image</text>
-</svg>

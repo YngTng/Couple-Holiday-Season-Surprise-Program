@@ -4,7 +4,7 @@ import { usePersistentState } from '../../hooks/usePersistentState';
 import { isBoolean, isStringArray } from '../../lib/storage';
 import { Particles } from '../../ui/Particles';
 import { Photo } from '../../ui/Photo';
-import { GiftStage } from '../birthday/GiftStage';
+import { GiftStage } from './GiftStage';
 import { ChristmasTree, TREE_SLOTS } from './ChristmasTree';
 
 const OPENED_KEY = 'december-exe:christmas-opened';

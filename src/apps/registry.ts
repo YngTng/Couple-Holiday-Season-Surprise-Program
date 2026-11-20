@@ -1,7 +1,5 @@
-import { BirthdayApp } from './birthday/BirthdayApp';
 import { ChristmasApp } from './christmas/ChristmasApp';
 import { ReunionCountdown } from './countdown/ReunionCountdown';
-import { AnniversaryApp } from './anniversary/AnniversaryApp';
 import { NewYearApp } from './newyear/NewYearApp';
 import { SettingsApp } from './settings/SettingsApp';
 import { PlaylistApp } from './playlist/PlaylistApp';
@@ -54,30 +52,12 @@ export const APPS: readonly AppDefinition[] = [
     size: { width: 460, height: 620 },
   },
   {
-    id: 'birthday',
-    title: 'Birthday.exe',
-    icon: '🎂',
-    unlockAt: '2026-12-10',
-    component: BirthdayApp,
-    // Tall enough for the three-tier cake without scrolling.
-    // Wide enough that the long letter doesn't scroll too much.
-    size: { width: 680, height: 780 },
-  },
-  {
     id: 'christmas',
     title: 'Christmas.exe',
     icon: '🎄',
     unlockAt: '2026-12-25',
     component: ChristmasApp,
     size: { width: 520, height: 700 },
-  },
-  {
-    id: 'anniversary',
-    title: 'Anniversary.exe',
-    icon: '💞',
-    unlockAt: '2026-12-30',
-    component: AnniversaryApp,
-    size: { width: 560, height: 600 },
   },
   {
     // The New Year's Eve invitation: they already know about it, so it's open from the start.

@@ -173,14 +173,14 @@ export const MERGE_PRIZE = {
 
 /**
  * When each mini game opens ("YYYY-MM-DD" in UNLOCK_TZ). They sit between the fixed event days:
- * Birthday (Dec 10) → Jar → Quiz → Christmas (Dec 25) → Rebuild Us → Anniversary (Dec 30).
+ * Jar → Quiz → Christmas (Dec 25) → Rebuild Us.
  * The Mini Games app itself opens earlier, on Dec 1 (see registry.ts), with these showing as locked.
  */
 export const GAME_UNLOCKS = {
-  /** Jar Full Of You → jar prize. A few days after the birthday. */
+  /** Jar Full Of You → jar prize. */
   merge: '2026-12-14',
   /** How well do you know us? → quiz prize. A few days before Christmas. */
   quiz: '2026-12-19',
-  /** Rebuild Us → puzzle prize. Between Christmas and the anniversary. */
+  /** Rebuild Us → puzzle prize. The day after Christmas. */
   puzzle: '2026-12-26',
 } as const;
