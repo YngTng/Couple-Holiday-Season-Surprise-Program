@@ -1,0 +1,689 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-plum: #2a1630;
+  --color-cream: #fff8ef;
+  --font-sans: ui-rounded, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+/* ---------- Colour mode (surfaces + text) ---------- */
+:root {
+  --surface: #fff8ef; /* warm cream */
+  --surface-2: #f5ecf4;
+  --ink: #33193a; /* dark plum */
+  --ink-muted: #5f4567;
+  --line: #e2d2e4;
+  --on-accent: #fff8ef;
+  --accent-text: var(--accent);
+  --focus: var(--accent);
+  color-scheme: light;
+}
+
+:root[data-mode='dark'] {
+  --surface: #261a2e;
+  --surface-2: #34243f;
+  --ink: #fbf1e8;
+  --ink-muted: #d5c3da;
+  --line: #4a3756;
+  --accent-text: var(--accent-soft);
+  --focus: var(--accent-soft);
+  color-scheme: dark;
+}
+
+/* ---------- Date-driven themes (accent colours) ---------- */
+/* --accent is used behind cream text (AA >= 4.5:1); --accent-soft is a pastel. */
+:root,
+:root[data-theme='cosy'] {
+  --accent: #6b4c8f; /* muted purple */
+  --accent-soft: #d9c8f0; /* lavender */
+}
+:root[data-theme='birthday'] {
+  --accent: #9a4560; /* dusty rose */
+  --accent-soft: #f6c9d6;
+}
+:root[data-theme='missing'] {
+  --accent: #57478a;
+  --accent-soft: #cbbfea;
+}
+:root[data-theme='together'] {
+  --accent: #8d4a5f;
+  --accent-soft: #f8cbbf; /* soft peach */
+}
+:root[data-theme='christmas'] {
+  --accent: #7b3442; /* berry */
+  --accent-soft: #cfe0c3; /* sage */
+}
+:root[data-theme='anniversary'] {
+  --accent: #6e3d6b;
+  --accent-soft: #ecc8dc;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Make room for the dev "Simulating: ..." badge at the top of mobile sheets. */
+:root[data-simulating='true'] .sim-offset {
+  padding-top: 3.75rem;
+}
+
+input[type='range'] {
+  accent-color: var(--accent);
+}
+
+/* ---------- Wallpapers ---------- */
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--wp-base);
+}
+.wallpaper::before {
+  content: '';
+  position: absolute;
+  inset: -320px 0 0 0;
+  background: var(--wp-pattern);
+  animation: wp-drift 90s linear infinite;
+}
+.wallpaper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: background-color 400ms ease;
+}
+:root[data-mode='dark'] .wallpaper::after {
+  background: rgba(24, 12, 30, 0.62);
+}
+
+.wallpaper[data-wallpaper='cosy'] {
+  --wp-base: linear-gradient(160deg, #efe4fb 0%, #fbe3ea 50%, #ffe8d4 100%);
+  --wp-pattern: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1.5px, transparent 2.5px) 0 0 / 40px 40px,
+    radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 2px) 20px 20px / 56px 56px;
+}
+.wallpaper[data-wallpaper='birthday'] {
+  --wp-base: linear-gradient(150deg, #fde2ea 0%, #f9d3e0 40%, #ffe6cf 100%);
+  --wp-pattern: radial-gradient(circle, #f2a3bb 2.5px, transparent 3.5px) 0 0 / 56px 56px,
+    radial-gradient(circle, #c7b2ec 2.5px, transparent 3.5px) 28px 14px / 70px 70px,
+    radial-gradient(circle, #ffcfa8 2px, transparent 3px) 12px 36px / 40px 40px;
+}
+.wallpaper[data-wallpaper='missing'] {
+  --wp-base: linear-gradient(180deg, #c9b8e6 0%, #e4c6de 55%, #f6d9cb 100%);
+  --wp-pattern: radial-gradient(circle, rgba(255, 255, 255, 0.85) 1px, transparent 2px) 0 0 / 35px 35px,
+    radial-gradient(circle, rgba(255, 248, 239, 0.7) 1.5px, transparent 2.5px) 17px 9px / 70px 70px;
+}
+.wallpaper[data-wallpaper='together'] {
+  --wp-base: linear-gradient(160deg, #ffe3d1 0%, #f9cfdb 50%, #e3d3f4 100%);
+  --wp-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Cpath d='M35 50s-13-7.8-13-16.2a7 7 0 0 1 13-3.7 7 7 0 0 1 13 3.7C48 42.2 35 50 35 50z' fill='%23ffffff' fill-opacity='0.4'/%3E%3C/svg%3E")
+    0 0 / 70px 70px;
+}
+.wallpaper[data-wallpaper='christmas'] {
+  --wp-base: linear-gradient(165deg, #e9f1e2 0%, #fbefe5 50%, #f3d7dc 100%);
+  --wp-pattern: radial-gradient(circle, rgba(255, 255, 255, 0.95) 2px, transparent 3px) 0 0 / 40px 40px,
+    radial-gradient(circle, rgba(255, 255, 255, 0.7) 1.5px, transparent 2.5px) 20px 20px / 56px 56px;
+}
+.wallpaper[data-wallpaper='anniversary'] {
+  --wp-base: linear-gradient(135deg, #e6daf5 0%, #f5d5e0 50%, #f8e1cc 100%);
+  --wp-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M28 18l2.4 7.6H38l-6.2 4.6 2.4 7.6-6.2-4.7-6.2 4.7 2.4-7.6-6.2-4.6h7.6z' fill='%23ffffff' fill-opacity='0.45'/%3E%3C/svg%3E")
+    0 0 / 56px 56px;
+}
+
+/* ---------- Letter paper (stays light in dark mode) ---------- */
+.paper-letter {
+  background-color: #fffaf2;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 31px, rgba(154, 69, 96, 0.12) 31px 32px);
+  background-position: 0 28px;
+  color: #33193a;
+  border: 1px solid #ead9cf;
+}
+.paper-letter:focus-visible {
+  outline: 3px solid #6b4c8f;
+}
+
+/* ---------- Confetti + snow ---------- */
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 8px;
+  height: 13px;
+  border-radius: 2px;
+  animation: confetti-fall 3s ease-in both;
+}
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #d3c8e6;
+  opacity: 0.9;
+  animation: snow-fall 9s linear infinite both;
+}
+:root[data-mode='dark'] .snowflake {
+  background: #fff8ef;
+  opacity: 0.7;
+}
+
+/* ---------- Birthday cake (the cake itself is SVG in CandleStage.tsx) ---------- */
+.candle-stick {
+  background: repeating-linear-gradient(135deg, #fff 0 4px, var(--candle, #4f9fd8) 4px 10px);
+  border-radius: 3px;
+  /* Same maroon outline as the cartoon cake. */
+  box-shadow: 0 0 0 1.5px #8b2f3c;
+}
+.flame {
+  width: 14px;
+  height: 22px;
+  margin-bottom: 3px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: radial-gradient(ellipse at 50% 70%, #fffbe6 0 25%, #ffd27a 45%, #f28c5b 80%);
+  box-shadow: 0 0 14px 4px rgba(255, 200, 110, 0.55);
+  transform-origin: 50% 100%;
+  animation: flicker 1.1s ease-in-out infinite alternate;
+}
+.smoke {
+  width: 10px;
+  height: 10px;
+  margin-bottom: 6px;
+  border-radius: 9999px;
+  background: rgba(160, 150, 170, 0.55);
+  animation: smoke-rise 1.4s ease-out both;
+}
+
+/* ---------- Birthday gift ---------- */
+.gift {
+  --gift: #f8cbbf;
+  --gift-lid: #eeb19f;
+  --ribbon: #9a4560;
+}
+.gift-box {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  height: 60%;
+  background: var(--gift);
+  border-radius: 10px;
+  box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.05), 0 8px 18px -8px rgba(42, 22, 48, 0.35);
+}
+.gift--open .gift-box::before {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: -55%;
+  height: 80%;
+  background: radial-gradient(closest-side, #fff6c8, transparent);
+  animation: fade-in 600ms ease-out both;
+}
+.gift-lid {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 24%;
+  height: 18%;
+  background: var(--gift-lid);
+  border-radius: 8px;
+  z-index: 2;
+  transition: transform 700ms cubic-bezier(0.3, 1.4, 0.5, 1), opacity 700ms ease;
+}
+.gift-ribbon {
+  position: absolute;
+  left: 50%;
+  top: 24%;
+  bottom: 0;
+  width: 14%;
+  transform: translateX(-50%);
+  background: var(--ribbon);
+  z-index: 3;
+  transition: opacity 400ms ease;
+}
+.gift-bow {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  width: 46%;
+  height: 20%;
+  transform: translateX(-50%);
+  z-index: 4;
+  transition: transform 700ms ease, opacity 700ms ease;
+}
+.gift-bow::before,
+.gift-bow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 48%;
+  height: 100%;
+  border: 7px solid var(--ribbon);
+  border-radius: 50%;
+}
+.gift-bow::before {
+  left: 0;
+  transform: rotate(-20deg);
+}
+.gift-bow::after {
+  right: 0;
+  transform: rotate(20deg);
+}
+.gift--open .gift-lid {
+  transform: translateY(-80px) rotate(-14deg);
+  opacity: 0;
+}
+.gift--open .gift-bow {
+  transform: translate(-50%, -90px) rotate(12deg);
+  opacity: 0;
+}
+.gift--open .gift-ribbon {
+  opacity: 0;
+}
+
+/* ---------- Christmas tree ---------- */
+.bauble {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.85) 0 3px, transparent 4px), var(--bauble);
+  box-shadow: inset -3px -4px 0 rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.25);
+  transform-origin: 50% -6px;
+}
+.bauble::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: 8px;
+  height: 5px;
+  transform: translateX(-50%);
+  background: #d8c08a;
+  border-radius: 2px;
+}
+.bauble--swing {
+  animation: swing 3s ease-in-out infinite alternate;
+}
+.bauble--opened {
+  box-shadow: 0 0 0 3px rgba(255, 248, 239, 0.9), 0 0 14px 5px var(--bauble);
+}
+.tree-light {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+.star-ready {
+  animation: star-pulse 1.6s ease-in-out infinite;
+}
+.star-lit svg {
+  filter: drop-shadow(0 0 6px #f2d27a) drop-shadow(0 0 14px #f2d27a);
+}
+/* Present under the tree: drops in once the star is lit, then glows gently so she taps it. */
+.tree-present {
+  transform-origin: 50% 100%;
+  animation:
+    present-drop 800ms cubic-bezier(0.3, 1.5, 0.5, 1) 300ms both,
+    present-glow 2s ease-in-out 1.1s infinite;
+}
+.tree-present:hover,
+.tree-present:focus-visible {
+  transform: scale(1.08);
+}
+@keyframes present-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-60%) scale(0.6);
+  }
+  60% {
+    opacity: 1;
+  }
+}
+@keyframes present-glow {
+  50% {
+    filter: drop-shadow(0 0 6px #f2d27a);
+  }
+}
+
+/* ---------- Envelope ----------
+   Layers, back to front: back (0) · opened flap (1) · paper (2) · front pocket (3) · closed flap (4) · seal (5).
+   The paper must sit above the opened flap, or it disappears behind it as it rises. */
+.envelope > span {
+  position: absolute;
+}
+.envelope-back {
+  inset: 0;
+  background: #e7a7ba;
+  border-radius: 10px;
+  z-index: 0;
+}
+.envelope-paper {
+  left: 8%;
+  right: 8%;
+  top: 8%;
+  bottom: 8%;
+  background: repeating-linear-gradient(to bottom, #fffaf2 0 14px, #f1e3dc 14px 15px);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  transition: transform 650ms ease 300ms;
+}
+.envelope-front {
+  inset: 0;
+  background: #f6c9d6;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 10px;
+  z-index: 3;
+}
+.envelope-flap {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 58%;
+  background: #eeb3c4;
+  /* Rounded like the envelope body, so the flap's top corners follow its curve instead of poking out. */
+  border-radius: 10px 10px 0 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  z-index: 4;
+  /* Drop behind the paper halfway through the swing, when the flap is edge-on, so the switch can't be seen. */
+  transition:
+    transform 500ms ease,
+    z-index 0s linear 250ms;
+}
+.envelope-seal {
+  left: 50%;
+  top: 56%;
+  width: 36px;
+  height: 36px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #9a4560;
+  color: #fff8ef;
+  font-size: 16px;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(42, 22, 48, 0.3);
+  transition: opacity 300ms ease;
+}
+.envelope--open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+.envelope--open .envelope-seal {
+  opacity: 0;
+}
+.envelope--open .envelope-paper {
+  transform: translateY(-45%);
+}
+
+/* ---------- Mini Games ---------- */
+.puzzle-area {
+  background: linear-gradient(180deg, #efe4fb 0%, #fbe3ea 70%, #ffe8d4 100%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+:root[data-mode='dark'] .puzzle-area {
+  background: linear-gradient(180deg, #2f2140 0%, #3d2440 70%, #4a2d3a 100%);
+}
+.puzzle-board {
+  fill: rgba(255, 248, 239, 0.55);
+  stroke: var(--line);
+  stroke-width: 0.02;
+}
+:root[data-mode='dark'] .puzzle-board {
+  fill: rgba(42, 22, 48, 0.45);
+}
+.puzzle-edge {
+  fill: none;
+  stroke: var(--ink-muted);
+  stroke-opacity: 0.35;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.puzzle-piece {
+  fill: transparent;
+  stroke: rgba(255, 248, 239, 0.9);
+  stroke-width: 1.5;
+}
+.puzzle-piece.is-placed {
+  stroke: rgba(255, 248, 239, 0.35);
+  stroke-width: 1;
+}
+.puzzle-piece.is-focused {
+  stroke: var(--focus);
+  stroke-width: 3;
+}
+.merge-area {
+  background: linear-gradient(180deg, #efe4fb 0%, #fbe3ea 70%, #ffe8d4 100%);
+}
+:root[data-mode='dark'] .merge-area {
+  background: linear-gradient(180deg, #2f2140 0%, #3d2440 70%, #4a2d3a 100%);
+}
+
+/* ---------- Playlist "now playing" bars ---------- */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.eq > span {
+  width: 3px;
+  height: 100%;
+  border-radius: 1px;
+  background: var(--accent-text);
+  transform-origin: bottom;
+  animation: eq 900ms ease-in-out infinite alternate;
+}
+.eq > span:nth-child(2) {
+  animation-delay: -300ms;
+}
+.eq > span:nth-child(3) {
+  animation-delay: -600ms;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes eq {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(30px, 900px, 0) rotate(720deg);
+    opacity: 0;
+  }
+}
+@keyframes snow-fall {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(14px, 450px, 0);
+  }
+  100% {
+    transform: translate3d(-6px, 900px, 0);
+  }
+}
+@keyframes flicker {
+  0% {
+    transform: scale(1, 1) rotate(-2deg);
+  }
+  50% {
+    transform: scale(0.92, 1.08) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.04, 0.95) rotate(-1deg);
+  }
+}
+@keyframes smoke-rise {
+  from {
+    transform: translateY(6px) scale(0.6);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(-22px) scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes gift-shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(6deg);
+  }
+}
+@keyframes swing {
+  from {
+    transform: rotate(-7deg);
+  }
+  to {
+    transform: rotate(7deg);
+  }
+}
+@keyframes twinkle {
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes star-pulse {
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px #f2d27a);
+  }
+}
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+@keyframes wp-drift {
+  to {
+    transform: translate3d(0, 280px, 0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+@keyframes window-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes install-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Reduced motion (Settings toggle or OS preference) ---------- */
+:root[data-reduce-motion='true'] *,
+:root[data-reduce-motion='true'] *::before,
+:root[data-reduce-motion='true'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ---------- Quiz coupon ----------
+   Ticket with a perforated tear line and half-circle notches cut into each side. */
+.coupon {
+  filter: drop-shadow(0 6px 14px rgb(42 22 48 / 0.22));
+}
+.coupon-body {
+  background:
+    radial-gradient(circle at 0 100%, transparent 12px, #fff8ef 12.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 12px, #fff8ef 12.5px) right / 51% 100% no-repeat;
+  border-bottom: 2px dashed #e7a7ba;
+}
+.coupon-stub {
+  background:
+    radial-gradient(circle at 0 0, transparent 12px, #f6c9d6 12.5px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 0, transparent 12px, #f6c9d6 12.5px) right / 51% 100% no-repeat;
+}
+@keyframes coupon-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) rotate(-6deg) scale(0.85);
+  }
+}

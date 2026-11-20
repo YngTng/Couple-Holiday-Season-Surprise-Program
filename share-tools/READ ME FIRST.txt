@@ -1,0 +1,12 @@
+YourProject.exe
+=============
+
+1. Right-click the zip and choose "Extract All..." (don't run it from inside the zip).
+2. Open the extracted folder and double-click "Start YourProject.bat".
+   - If Windows shows "Windows protected your PC", click "More info" then "Run anyway".
+3. Your browser opens YourProject.exe. Keep the black window open while you use it; close it when you're done.
+
+Nothing gets installed, and everything works offline, music included. Needs Windows.
+
+New things unlock on their own days, so come back and check every so often.
+Your progress is saved in that browser, so keep using the same one.
