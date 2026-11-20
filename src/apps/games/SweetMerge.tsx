@@ -40,7 +40,7 @@ const DROP_COOLDOWN_S = 0.45;
 /** How long the pile may poke above the line before it's game over. */
 const OVER_AFTER_S = 2;
 const AIM_STEP = 18;
-/** Reaching this score wins the game (she can keep playing after). */
+/** Reaching this score wins the game (they can keep playing after). */
 const WIN_SCORE = 200;
 
 /** Points for making a tier: 1, 3, 6, 10, … */
@@ -427,7 +427,7 @@ export function SweetMerge() {
   return (
     <div className="relative flex min-h-0 flex-1 flex-col gap-3">
       {showPrize && (
-        // Covers the game rather than replacing it, so the jar (and a won game she may keep playing) stays put underneath.
+        // Covers the game rather than replacing it, so the jar (and a won game they may keep playing) stays put underneath.
         <div className="absolute inset-0 z-10 flex flex-col items-center gap-4 overflow-y-auto bg-surface py-4 text-center">
           {showPrize === 'fresh' && <Particles variant="confetti" count={36} />}
           <h3 ref={prizeHeadingRef} tabIndex={-1} className="px-4 text-lg font-semibold text-ink outline-none">

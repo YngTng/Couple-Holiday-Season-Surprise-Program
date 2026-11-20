@@ -5,27 +5,30 @@ It boots up, shows a desktop, and new apps unlock on their own days: a countdown
 a birthday app with candles and a letter, a Christmas tree with a present, a New Year's Eve invitation,
 an anniversary photo wall, a playlist and three mini games with prize coupons.
 
+It runs locally on a Windows laptop: you build it into a zip, and the recipient double-clicks a `.bat`
+file that serves it on their own computer. Nothing is hosted online, nothing needs installing on their
+side, and everything (music included) works offline.
+
 Stack: Vite, React 18, TypeScript, Tailwind CSS v4. No backend, no analytics, no network calls, no
-environment variables. The build is a static site that works offline.
+environment variables.
 
 Every name, message, photo, date and prize in this template is a placeholder. Fill them in with your own.
 
-## Quick start
+## Quick start (Windows)
 
-Needs Node 18 or newer.
+You need [Node.js](https://nodejs.org) 18 or newer (LTS) on the computer you build on.
+
+1. Double-click **`Test Run.bat`**. The first run installs packages, then it builds the site and opens it
+   in your browser. Leave the black window open while testing; close it to stop.
+2. Fill in your content (see the placeholder table below) and run `Test Run.bat` again to check it.
+3. When it's ready, double-click **`Make Package.bat`** to make the gift zip (see Package and share).
+
+While editing you can also use a live-reloading dev server:
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
 ```
-
-```bash
-npm run build      # type-checks, then builds to dist/
-npm run preview    # serves the production build
-```
-
-On Windows you can also double-click `Test Run.bat` (build + preview) or `Make Package.bat`
-(builds and zips the site with a no-install launcher, see Deploy).
 
 ### Try every app straight away
 
@@ -42,12 +45,11 @@ SVG and update the path.
 
 | File | Placeholder | What to enter |
 | --- | --- | --- |
-| `src/content/person.ts` | `HER_NAME = 'Their Name'` | The name or nickname of the person the site is for |
+| `src/content/person.ts` | `THEIR_NAME = 'Their Name'` | The name or nickname of the person the site is for |
 | `src/content/person.ts` | `MY_NAME = 'Your Name'` | Your name; used as the letter signature and on coupons |
 | `src/content/person.ts` | `APP_NAME = 'YourProject.exe'` | The name of your "OS", shown on the boot screen and taskbar |
 | `index.html` | `<title>YourProject.exe</title>` | Same name, for the browser tab |
 | `package.json` | `"name": "your-project-name"` | A lowercase package name (optional) |
-| `LICENSE` | `Your Name` | The copyright holder |
 | `src/config/time.ts` | `UNLOCK_TZ = 'UTC'` | Your IANA time zone, e.g. `Europe/London`. Every unlock and theme uses it |
 | `src/config/time.ts` | `THEME_DATES` (2026-12-10, 12-11, 12-25, 12-30) | Birthday, day after the birthday, Christmas, anniversary |
 | `src/config/time.ts` | `REUNION_AT` (2026-12-20 18:00) | When you'll be together again: the countdown target |
@@ -98,16 +100,22 @@ With the template defaults:
 | Dec 25 | Christmas | Christmas.exe |
 | Dec 30 onward | Anniversary | Anniversary.exe |
 
-## Deploy
+## Package and share
 
-`npm run build` writes a static site to `dist/`. Host it on any static host (Netlify, Vercel, GitHub Pages,
-Cloudflare Pages, or your own server). For a sub-path such as GitHub Pages, set `base` in `vite.config.ts`.
+Before packaging: set `UNLOCK_EVERYTHING` to `false` and change the simulator password.
 
-To hand it over as a file instead of a link (Windows only), run `Make Package.bat`. It builds the site and
-writes `YourProject.zip` containing the site and a small PowerShell web server. The recipient unzips it and
-double-clicks `Start YourProject.bat`.
+Double-click **`Make Package.bat`**. It builds the site and writes `YourProject.zip` to the project folder,
+containing:
 
-Before sharing: set `UNLOCK_EVERYTHING` to `false`, change the simulator password, and rebuild.
+- `site/`: the built site
+- `Start YourProject.bat`: the launcher the recipient double-clicks
+- `server.ps1`: a tiny PowerShell web server the launcher runs (localhost only, ports 4173–4193)
+- `READ ME FIRST.txt`: instructions for the recipient
+
+Give them the zip (USB stick, email, cloud drive). They extract it, double-click `Start YourProject.bat`,
+and the site opens in their browser. If Windows SmartScreen warns about it, they click "More info" then
+"Run anyway". Their progress is saved in that browser, so they should keep using the same one.
+The recipient needs Windows but not Node.js.
 
 ## Project map
 

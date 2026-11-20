@@ -9,7 +9,7 @@ export interface AnniversaryContent {
   bouquetLabel: string;
   /** Picture used as the bouquet button, under /public. Transparent PNG works best. */
   bouquetPhoto: string;
-  /** Shown when she taps the bouquet. */
+  /** Shown when they tap the bouquet. */
   message: string;
   /** Picture above the message, under /public. */
   messagePhoto: string;

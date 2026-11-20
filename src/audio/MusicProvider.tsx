@@ -36,7 +36,7 @@ const MusicContext = createContext<MusicValue | null>(null);
 
 const PLAYABLE: readonly PlayableSong[] = PLAYLIST.flatMap((song) => (song.audio ? [{ ...song, audio: song.audio }] : []));
 
-/** One <audio> element for the whole app, so music keeps playing while she uses other apps. */
+/** One <audio> element for the whole app, so music keeps playing while they use other apps. */
 export function MusicProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentIdRef = useRef<string | null>(null);
@@ -48,7 +48,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [playerVisible, setPlayerVisible] = useState(false);
 
-  /** Created on first play, so nothing loads until she asks for music. */
+  /** Created on first play, so nothing loads until they ask for music. */
   const getAudio = useCallback((): HTMLAudioElement => {
     if (audioRef.current) return audioRef.current;
     const audio = new Audio();

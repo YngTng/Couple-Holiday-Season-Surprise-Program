@@ -8,13 +8,13 @@ export const BEST_KEYS = {
   quiz: 'december-exe:best-quiz-score',
 } as const;
 
-/** Set to true once she gets every quiz question right; unlocks the coupon for good. */
+/** Set to true once they get every quiz question right; unlocks the coupon for good. */
 export const QUIZ_COUPON_KEY = 'december-exe:quiz-coupon-won';
 
-/** Set to true once she reaches the winning score in Jar Full Of You; unlocks its prize for good. */
+/** Set to true once they reach the winning score in Jar Full Of You; unlocks its prize for good. */
 export const MERGE_PRIZE_KEY = 'december-exe:merge-prize-won';
 
-/** Set to true once she finishes the Rebuild Us jigsaw; unlocks its prize for good. */
+/** Set to true once they finish the Rebuild Us jigsaw; unlocks its prize for good. */
 export const PUZZLE_PRIZE_KEY = 'december-exe:puzzle-prize-won';
 
 /** 83 → "1:23" */

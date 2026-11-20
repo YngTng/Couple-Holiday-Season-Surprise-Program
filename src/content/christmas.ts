@@ -5,7 +5,7 @@ export interface ChristmasContent {
   /** Written on the present's gift tag. */
   giftTag: string;
   /**
-   * Photo of the real present, shown once she unwraps it. Path under /public, e.g. "/photos/xmas.jpg".
+   * Photo of the real present, shown once they unwrap it. Path under /public, e.g. "/photos/xmas.jpg".
    * Leave empty ('') to show a 🎁 instead. Use a file name that doesn't give the gift away.
    */
   giftPhoto: string;
@@ -24,7 +24,7 @@ export const CHRISTMAS: ChristmasContent = {
 };
 
 export interface ChristmasOrnament {
-  /** Unique and stable: used to remember which ornaments she has lit. */
+  /** Unique and stable: used to remember which ornaments they have lit. */
   id: string;
 }
 

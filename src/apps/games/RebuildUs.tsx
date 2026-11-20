@@ -187,7 +187,7 @@ export function RebuildUs() {
   const placedCount = pieces.filter((p) => p.placed).length;
   const won = placedCount === pieces.length;
 
-  // Tell her if the photo path is wrong instead of showing blank pieces.
+  // Tell them if the photo path is wrong instead of showing blank pieces.
   useEffect(() => {
     setPhotoError(false);
     const img = new Image();
@@ -365,7 +365,7 @@ export function RebuildUs() {
 
       <div ref={wrapRef} className="min-h-0 w-full flex-1 overflow-hidden">
         {won && (
-          // Finished: the whole photo, centred, with her time right underneath.
+          // Finished: the whole photo, centred, with their time right underneath.
           <div className="flex h-full flex-col items-center justify-center gap-3">
             <Photo
               src={PUZZLE.photo}
@@ -402,7 +402,7 @@ export function RebuildUs() {
               <g style={{ opacity: peek && !won ? 0.25 : 0, transition: reducedMotion ? undefined : 'opacity 200ms' }}>
                 <g clipPath={`url(#${uid}-board)`}>{photo}</g>
               </g>
-              {/* Outer edge only: no slot outlines inside, so she has to work out where pieces go. */}
+              {/* Outer edge only: no slot outlines inside, so they have to work out where pieces go. */}
               {!won && <rect width={SIZE} height={SIZE} rx={CORNER_R} className="puzzle-edge" vectorEffect="non-scaling-stroke" />}
             </svg>
 

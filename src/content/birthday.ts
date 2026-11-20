@@ -1,4 +1,4 @@
-import { HER_NAME, MY_NAME } from './person';
+import { THEIR_NAME, MY_NAME } from './person';
 
 /** The letter text in one language. */
 export interface LetterTranslation {
@@ -31,7 +31,7 @@ export interface BirthdayContent {
 }
 
 export const BIRTHDAY: BirthdayContent = {
-  greeting: `Happy Birthday, ${HER_NAME}!`,
+  greeting: `Happy Birthday, ${THEIR_NAME}!`,
   candleCount: 21,
   giftTag: 'Your gift tag text',
   languageLabel: 'English',

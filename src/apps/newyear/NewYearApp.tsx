@@ -9,7 +9,7 @@ import { useWindowManager } from '../../windows/WindowManager';
 
 const OPENED_KEY = 'december-exe:nye-opened';
 const RSVP_KEY = 'december-exe:nye-rsvp';
-/** After she taps "I'll be there", the window closes this long after, so she sees the tick and confetti first. */
+/** After they tap "I'll be there", the window closes this long after, so they see the tick and confetti first. */
 const CLOSE_AFTER_RSVP_MS = 1500;
 const isBool = (v: unknown): v is boolean => typeof v === 'boolean';
 
@@ -48,7 +48,7 @@ export function NewYearApp() {
   const nowMs = now.getTime();
   const [opened, setOpened] = usePersistentState(OPENED_KEY, false, isBool);
   const [rsvp, setRsvp] = usePersistentState(RSVP_KEY, false, isBool);
-  // Confetti when she taps the RSVP button (and again on every later tap), not on every reopen.
+  // Confetti when they tap the RSVP button (and again on every later tap), not on every reopen.
   const [celebrations, setCelebrations] = useState(0);
   const { closeWindow } = useWindowManager();
 

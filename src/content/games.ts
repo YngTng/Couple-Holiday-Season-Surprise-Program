@@ -1,4 +1,4 @@
-import { HER_NAME, MY_NAME } from './person';
+import { THEIR_NAME, MY_NAME } from './person';
 
 /** Content for the Mini Games app. */
 
@@ -46,9 +46,9 @@ export interface QuizQuestion {
   options: readonly string[];
   /** Index into options of the right answer (0 = first). */
   answerIndex: number;
-  /** Optional line shown after she answers, e.g. the story behind it. */
+  /** Optional line shown after they answer, e.g. the story behind it. */
   reveal?: string;
-  /** Optional line shown only when she gets it right. */
+  /** Optional line shown only when they get it right. */
   correctReveal?: string;
 }
 
@@ -80,9 +80,9 @@ export const QUIZ: QuizContent = {
     {
       id: 'question-3',
       question: 'Who is more likely to ...?',
-      options: [MY_NAME, HER_NAME],
+      options: [MY_NAME, THEIR_NAME],
       answerIndex: 1,
-      correctReveal: 'Optional line shown when she gets it right',
+      correctReveal: 'Optional line shown when they get it right',
     },
   ],
   endMessage: 'Your perfect-score message here',
@@ -103,8 +103,8 @@ export interface CouponContent {
 }
 
 /**
- * The prize for a perfect quiz score. Once won it stays unlocked on her device,
- * so she can open it again from the quiz's start screen to "redeem" it.
+ * The prize for a perfect quiz score. Once won it stays unlocked on their device,
+ * so they can open it again from the quiz's start screen to "redeem" it.
  */
 export const QUIZ_COUPON = {
   /** Small line above the title. */
@@ -113,7 +113,7 @@ export const QUIZ_COUPON = {
   subtitle: 'Your prize subtitle',
   icon: '🎁',
   /** Names on the coupon (from person.ts; replace with text to write them differently here). */
-  to: HER_NAME,
+  to: THEIR_NAME,
   from: MY_NAME,
   /** The fine print. Keep it short and silly. */
   terms: [
@@ -127,17 +127,17 @@ export const QUIZ_COUPON = {
 
 /**
  * The prize for finishing the Rebuild Us jigsaw (any time counts). Once won it stays unlocked
- * on her device, so she can open it again from the puzzle screen.
+ * on their device, so they can open it again from the puzzle screen.
  */
 export const PUZZLE_PRIZE = {
-  /** Shown above the coupon when she collects it. */
+  /** Shown above the coupon when they collect it. */
   reveal: 'You rebuilt us! Your prize is ...',
   coupon: {
     kicker: 'Official coupon · puzzle solved',
     title: 'Your Puzzle Prize',
     subtitle: 'Your prize subtitle',
     icon: '🎁',
-    to: HER_NAME,
+    to: THEIR_NAME,
     from: MY_NAME,
     terms: [
       'Your first coupon term.',
@@ -150,17 +150,17 @@ export const PUZZLE_PRIZE = {
 
 /**
  * The prize for reaching the winning score in Jar Full Of You. Once won it stays unlocked
- * on her device, so she can open it again from the game's start screen.
+ * on their device, so they can open it again from the game's start screen.
  */
 export const MERGE_PRIZE = {
-  /** Shown above the coupon when she collects it. */
+  /** Shown above the coupon when they collect it. */
   reveal: 'You filled the jar! Your prize is ...',
   coupon: {
     kicker: 'Official coupon · 200 points',
     title: 'Your Jar Prize',
     subtitle: 'Your prize subtitle',
     icon: '🎁',
-    to: HER_NAME,
+    to: THEIR_NAME,
     from: MY_NAME,
     terms: [
       'Your first coupon term.',

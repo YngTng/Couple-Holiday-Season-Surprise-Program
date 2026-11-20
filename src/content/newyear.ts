@@ -22,9 +22,9 @@ export interface NyeContent {
   date: string;
   intro: string;
   dressCode: string;
-  /** Button text before she accepts. */
+  /** Button text before they accept. */
   rsvpLabel: string;
-  /** Button text once she has accepted. */
+  /** Button text once they have accepted. */
   rsvpDone: string;
   /** Shown from midnight on Jan 1. */
   happyNewYear: string;

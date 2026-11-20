@@ -343,7 +343,7 @@ input[type='range'] {
 .star-lit svg {
   filter: drop-shadow(0 0 6px #f2d27a) drop-shadow(0 0 14px #f2d27a);
 }
-/* Present under the tree: drops in once the star is lit, then glows gently so she taps it. */
+/* Present under the tree: drops in once the star is lit, then glows gently so they tap it. */
 .tree-present {
   transform-origin: 50% 100%;
   animation:

@@ -80,7 +80,7 @@ export const APPS: readonly AppDefinition[] = [
     size: { width: 560, height: 600 },
   },
   {
-    // The New Year's Eve invitation: she already knows about it, so it's open from the start.
+    // The New Year's Eve invitation: they already know about it, so it's open from the start.
     id: 'newyear',
     title: 'NYE.exe',
     icon: '🎆',
