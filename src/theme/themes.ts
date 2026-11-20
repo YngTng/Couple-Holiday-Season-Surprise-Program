@@ -11,7 +11,7 @@ export interface ThemeInfo {
 }
 
 export const THEMES: Record<ThemeId, ThemeInfo> = {
-  cosy: { label: 'Cosy December', dates: 'Dec 1–6' },
+  cosy: { label: 'Cosy December', dates: 'until Dec 9' },
   birthday: { label: 'Birthday', dates: 'Dec 10' },
   missing: { label: 'Missing You', dates: 'Dec 11 – Dec 20, 6:00 pm' },
   together: { label: 'Together Mode', dates: 'from Dec 20, 6:00 pm' },

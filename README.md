@@ -69,6 +69,7 @@ SVG and update the path.
 | `src/content/memories.ts` | `Caption for memory 1` …, `/photos/1.svg` … | Your photo wall: one entry per photo with caption, date and alt text |
 | `src/content/newyear.ts` | `Your invitation intro here.`, `Dress code: ...`, `Your Happy New Year message here.` | The New Year's Eve invitation |
 | `src/content/newyear.ts` | `Restaurant Name`, `123 Example Street, City`, `Dessert Place Name` … | The plan for the night: times, venues, addresses, notes |
+| `src/content/newyear.ts`, `src/apps/newyear/NewYearApp.tsx` | `date: 'Thursday 31 December 2026'`, `NYE_YEAR = 2026` | The New Year's Eve date text and its year (see How the dates work) |
 | `src/content/playlist.ts` | `Song Title 1`, `Artist Name` | Your songs. Put MP3s in `public/music/` and add `audio: '/music/file.mp3'` |
 | `src/content/games.ts` | `Ball 1 name` …, `/images/merge/1.svg` … | The five photo balls in the merge game, smallest first |
 | `src/content/games.ts` | `/photos/puzzle.svg`, `Describe your puzzle photo here` | The jigsaw photo (cropped to a centred square) |
@@ -87,18 +88,37 @@ Tips:
 
 ## How the dates work
 
-All "is it unlocked yet?" and theme decisions use one time zone, `UNLOCK_TZ` in `src/config/time.ts`.
-With the template defaults:
+**Every date below is an example. Change them to your own birthday, reunion and anniversary, in any
+month and year.** The template ships with a December 2026 schedule only because it's built around the
+holiday season.
 
-| Date | Theme | Unlocks |
-| --- | --- | --- |
-| before Dec 1 | Cosy December | Playlist, Countdown, Settings, NYE.exe (always open) |
-| Dec 1 | Cosy December | Mini Games (each game opens on its `GAME_UNLOCKS` date) |
-| Dec 10 | Birthday | Birthday.exe |
-| Dec 11 – Dec 20, 6:00 pm | Missing You | |
-| from `REUNION_AT` | Together Mode | Countdown switches to "LongDistance.exe has stopped running" |
-| Dec 25 | Christmas | Christmas.exe |
-| Dec 30 onward | Anniversary | Anniversary.exe |
+All "is it unlocked yet?" and theme decisions use one time zone, `UNLOCK_TZ` in `src/config/time.ts`.
+Dates are `YYYY-MM-DD` strings in that time zone.
+
+| Example date | Theme | Unlocks | Where to change it |
+| --- | --- | --- | --- |
+| any time | | Playlist, Countdown, Settings, NYE.exe (always open) | `ALWAYS_UNLOCKED` apps in `src/apps/registry.ts` |
+| until Dec 9 | Cosy December | | (the default theme before `missingFrom`) |
+| Dec 1 | Cosy December | Mini Games app (each game then opens on its own date) | `unlockAt` for `games` in `src/apps/registry.ts` |
+| Dec 14, Dec 19, Dec 26 | | Jar Full Of You, quiz, Rebuild Us | `GAME_UNLOCKS` in `src/content/games.ts` |
+| Dec 10 | Birthday | Birthday.exe | `THEME_DATES.birthday` and `unlockAt` for `birthday` |
+| Dec 11 – Dec 20, 6:00 pm | Missing You | | `THEME_DATES.missingFrom` until `REUNION_AT` |
+| from Dec 20, 6:00 pm | Together Mode | Countdown switches to "LongDistance.exe has stopped running" | `REUNION_AT` in `src/config/time.ts` |
+| Dec 25 | Christmas | Christmas.exe | `THEME_DATES.christmas` and `unlockAt` for `christmas` |
+| Dec 30 onward | Anniversary | Anniversary.exe | `THEME_DATES.anniversaryFrom` and `unlockAt` for `anniversary` |
+| Dec 31 | | NYE.exe counts down to midnight, then says Happy New Year | `NYE_YEAR` in `src/apps/newyear/NewYearApp.tsx` and `NYE.date` in `src/content/newyear.ts` |
+
+When you change a date, update every place in its row, then:
+
+- Change the matching text labels: the `dates` labels in `src/theme/themes.ts` (shown in Settings), and
+  the `PRESETS` in `src/dev/DateSimulator.tsx` (quick-jump buttons). These are display text only, so
+  nothing breaks if you forget, but they'd show the old dates.
+- If your dates aren't in December, rename the "Cosy December" theme label in `src/theme/themes.ts`.
+- Keep the order the theme logic expects: birthday, then `missingFrom`, then `REUNION_AT`, with
+  `anniversaryFrom` last. Birthday and Christmas are single days and win over the ranges around them;
+  Anniversary runs from its date onward.
+
+Use the date simulator (backtick key) to jump to each date and check it.
 
 ## Package and share
 

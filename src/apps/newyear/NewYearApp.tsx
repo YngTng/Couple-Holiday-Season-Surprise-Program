@@ -13,6 +13,7 @@ const RSVP_KEY = 'december-exe:nye-rsvp';
 const CLOSE_AFTER_RSVP_MS = 1500;
 const isBool = (v: unknown): v is boolean => typeof v === 'boolean';
 
+/** The year whose Dec 31 the invitation is for. Change it if you use a different year (see README). */
 const NYE_YEAR = 2026;
 const MIDNIGHT_MS = zonedToUtc(NYE_YEAR + 1, 1, 1).getTime();
 

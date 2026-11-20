@@ -13,7 +13,7 @@ interface Preset {
 const PRESETS: readonly Preset[] = [
   { label: 'Nov 30', value: '2026-11-30T12:00' },
   { label: 'Dec 1', value: '2026-12-01T09:00' },
-  { label: 'Dec 6', value: '2026-12-06T12:00' },
+  { label: 'Dec 9', value: '2026-12-09T12:00' },
   { label: 'Dec 10', value: '2026-12-10T09:00' },
   { label: 'Dec 11', value: '2026-12-11T12:00' },
   { label: 'Dec 20', value: '2026-12-20T09:00' },
